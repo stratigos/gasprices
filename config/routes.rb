@@ -5,6 +5,11 @@ Rails.application.routes.draw do
 
   get 'about' => 'homepage#about', :as => 'about'
 
+  namespace :api do
+    namespace :v1 do
+      resources :states, only: [:index, :show]
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
