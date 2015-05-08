@@ -14,3 +14,8 @@
 # ActiveSupport::Inflector.inflections(:en) do |inflect|
 #   inflect.acronym 'RESTful'
 # end
+
+# Inflection rule to support capitalization of API module
+ActiveSupport::Inflector.inflections(:en) do |inflect|  
+  inflect.acronym 'API' 
+end

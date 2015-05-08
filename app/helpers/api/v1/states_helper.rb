@@ -1,2 +1,2 @@
-module Api::V1::StatesHelper
+module API::V1::StatesHelper
 end
