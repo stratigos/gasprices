@@ -1,6 +1,6 @@
 == README
 
-UNDER CONSTRUCTION
+<b>UNDER CONSTRUCTION</b>
 
 This application displays today's gas prices for each state in the USA.  
 An input field allows for selecting the gas price for a single state.
@@ -13,7 +13,7 @@ DB: PostgreSQL v 9.3.6
 
 Tests: run Minitest with <tt>./bin/rake</tt>
 
-Please see [License File](LICENSE.md)
+Please see LICENSE.md
 
 Things you may want to cover:
 
