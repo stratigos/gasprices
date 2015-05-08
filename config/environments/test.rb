@@ -20,6 +20,9 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
+  # Enable all helpers to allow states_abbrv_helper to be available
+  config.action_controller.include_all_helpers = true
+
   # Raise exceptions instead of rendering exception templates.
   config.action_dispatch.show_exceptions = false
 
