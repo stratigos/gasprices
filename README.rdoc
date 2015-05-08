@@ -1,11 +1,18 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+UNDER CONSTRUCTION
+
+This application displays today's gas prices for each state in the USA. An input field allows for selecting the gas price for a single state.
+
+Ruby: ruby 2.0.0p598 (2014-11-13 revision 48408) [x86_64-linux]
+
+Rails: 4.2.1
+
+DB: PostgreSQL v 9.3.6
+
+Tests: run Minitest with `./bin/rake`
 
 Things you may want to cover:
-
-* Ruby version
 
 * System dependencies
 
@@ -14,8 +21,6 @@ Things you may want to cover:
 * Database creation
 
 * Database initialization
-
-* How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
 
