@@ -2,7 +2,8 @@
 
 UNDER CONSTRUCTION
 
-This application displays today's gas prices for each state in the USA. An input field allows for selecting the gas price for a single state.
+This application displays today's gas prices for each state in the USA.  
+An input field allows for selecting the gas price for a single state.
 
 Ruby: ruby 2.0.0p598 (2014-11-13 revision 48408) [x86_64-linux]
 
