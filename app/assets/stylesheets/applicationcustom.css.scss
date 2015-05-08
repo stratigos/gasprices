@@ -2,3 +2,17 @@
 //  and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+/* General Helper Classes */
+
+.shadow {
+    box-shadow: 0 0 10px #000;
+}
+
+.voffset10 {
+    margin-top: 10px;
+}
+
+.voffset20 {
+    margin-top: 20px;
+}
