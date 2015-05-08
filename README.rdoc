@@ -13,6 +13,8 @@ DB: PostgreSQL v 9.3.6
 
 Tests: run Minitest with `./bin/rake`
 
+Please see [License File](LICENSE.md)
+
 Things you may want to cover:
 
 * System dependencies
