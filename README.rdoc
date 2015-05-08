@@ -11,7 +11,7 @@ Rails: 4.2.1
 
 DB: PostgreSQL v 9.3.6
 
-Tests: run Minitest with `./bin/rake`
+Tests: run Minitest with <tt>./bin/rake</tt>
 
 Please see [License File](LICENSE.md)
 
