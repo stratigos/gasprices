@@ -1,11 +1,8 @@
 require 'test_helper'
 
 class ListAllStatesTest < ActionDispatch::IntegrationTest
-  
-  # setup do
-  #   # create all states here?
-  # end
 
+  # States are created in ../fixtures/states.yml  
   test 'Lists All States and Gas Prices' do
     get '/api/v1/states'
 
