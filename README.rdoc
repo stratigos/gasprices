@@ -15,7 +15,9 @@ An input field allows for selecting the gas price for a single state.
 
 <b>Initialize Database:</b> <tt>./bin/rake db:migrate</tt> 
  
- To connect to the db, set the following environment params: DEV_PG_DB_USER and TEST_PG_DB_USER, which represent the db username.
+ To connect to the db, set the following environment params:
+ DEV_PG_DB_USER and TEST_PG_DB_USER,
+ which represent the db username.
 
 <b>Run application:</b> <tt>bundle exec puma -C config/puma.rb</tt>
 
