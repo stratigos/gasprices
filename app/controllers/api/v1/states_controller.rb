@@ -2,10 +2,10 @@ module API
   module V1
     class StatesController < ApplicationController
 
-      # Not caching :show due to issue with varying filenames that need
-      #  to be cleared, and lack of wildcard with page cache gem
       # DUE TO READ-ONLY FILEMOUNT WITH HEROKU SERVER, PAGE CACHING NOT
       #  AVAILABLE IN PRODUCTION
+      # Not caching :show due to issue with varying filenames that need
+      #  to be cleared, and lack of wildcard with page cache gem
       # caches_page :index
       
       # Render all States and gas prices. States are selected from a scope
@@ -29,8 +29,6 @@ module API
         will_expire_in = next_update.to_time - Time.now
 
         # caching headers
-        # using `fresh_when` causes `AbstractController::DoubleRenderError`
-        # fresh_when etag: states, last_modified: states.maximum(:updated_at)
         expires_in will_expire_in.to_i, :public => true
         response.headers['Last-Modified'] = last_update.utc.to_s
         response.headers['Expires']       = next_update.utc.to_s
