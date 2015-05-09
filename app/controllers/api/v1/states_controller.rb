@@ -23,9 +23,17 @@ module API
           states = State.today
         end
 
+        # calculating cache values
+        last_update    = states.maximum(:updated_at).to_datetime
+        next_update    = last_update + 1
+        will_expire_in = next_update.to_time - Time.now
+
         # caching headers
-        expires_in 3.hours, :public => true
-        fresh_when last_modified: states.maximum(:updated_at), :public => true
+        # using `fresh_when` causes `AbstractController::DoubleRenderError`
+        # fresh_when etag: states, last_modified: states.maximum(:updated_at)
+        expires_in will_expire_in.to_i, :public => true
+        response.headers['Last-Modified'] = last_update.utc.to_s
+        response.headers['Expires']       = next_update.utc.to_s
 
         render json: states, status: 200
       end
@@ -37,8 +45,15 @@ module API
         state            = State.find_by(name: state_name_param)
 
         if !state.blank?
-          expires_in 1.hour, :public => true
-          fresh_when last_modified: state.updated_at, :public => true
+          # calculating cache values
+          last_update    = state.updated_at.to_datetime
+          next_update    = last_update + 1
+          will_expire_in = next_update.to_time - Time.now
+
+          # cache headers
+          expires_in will_expire_in.to_i, :public => true
+          response.headers['Last-Modified'] = last_update.utc.to_s
+          response.headers['Expires']       = next_update.utc.to_s
           render json: state, status: 200
         else
           expires_in 1.hour, :public => true

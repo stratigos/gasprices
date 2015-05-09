@@ -5,7 +5,7 @@ class HomepageController < ApplicationController
   # caches_page :index, :about
 
   def index
-    expires_in 1.day, :public => true
+    expires_in 1.day
     fresh_when last_modified: Time.parse('6am', 1.day.ago), :public => true
   end
 

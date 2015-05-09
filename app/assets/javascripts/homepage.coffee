@@ -31,7 +31,7 @@ allstateinfo = ->
     url: '/api/v1/states'
     dataType: 'json'
     error: (jqXHR, textStatus, errorThrown) ->
-      $('#all-gas-prices').html "#{textStatus} : #{errorThrown}"
+      $('#all-gas-prices').html "There was an issue processing this request. Please try again."
     success: (data, textStatus, jqXHR) ->
       if data.states
         states = data.states
