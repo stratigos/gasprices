@@ -19,3 +19,5 @@
 # Ignoring DB / Secret configs
 # /config/*.yml
 
+# ignoring page caching files
+/public/deploy/
