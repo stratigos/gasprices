@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class LoadAboutTest < ActionDispatch::IntegrationTest
+  # Tests that the /about page loads, has expected content-type, and uses the
+  #  about template.
   test 'Loads Homepage' do
     get about_path
 
