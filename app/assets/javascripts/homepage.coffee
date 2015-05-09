@@ -20,7 +20,6 @@ stateinfo = (state) ->
         $('#state-gas-price').html(list)
         $('#state-gas-price').fadeIn 'fast', ->
           $(this).effect 'shake', {direction: 'down', distance: 10, times: 2}
-          #('shake', {distance:3}, 200);
       else
         $('#state-gas-price').text('error: invalid US state')
 
