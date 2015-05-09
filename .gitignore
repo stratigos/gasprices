@@ -17,5 +17,5 @@
 /tmp
 
 # Ignoring DB / Secret configs
-/config/*.yml
+# /config/*.yml
 

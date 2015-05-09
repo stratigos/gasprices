@@ -1,0 +1,28 @@
+##################
+## Postgres 9.3 ##
+##################
+development: 
+  encoding: unicode
+  adapter: postgresql
+  database: gasprices
+  pool: 5
+  timeout: 5000
+  username: <%= ENV["DEV_PG_DB_USER"] %>
+  password: 
+
+test: 
+  adapter: postgresql
+  database: gaspricestest
+  encoding: unicode
+  pool: 5
+  username: <%= ENV["TEST_PG_DB_USER"] %>
+  password:
+
+production:
+  adapter: postgresql
+  database: <%= ENV["PROD_PG_DB_SCHEMA"] %>
+  encoding: unicode
+  pool: 5
+  timeout: 5000
+  username: <%= ENV["PROD_PG_DB_USER"] %>
+  password: <%= ENV["PROD_PG_DB_PASS"] %>
