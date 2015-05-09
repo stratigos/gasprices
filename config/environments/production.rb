@@ -15,7 +15,8 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
 
   # Page caching (`public` dir found at root in Heroku)
-  config.action_controller.page_cache_directory = '/public/deploy'
+  # PAGE CACHING REMOVED DUE TO HEROKU NOT ALLOWING FILE WRITES (NEEDS CDN/S3)
+  # config.action_controller.page_cache_directory = '/public/deploy'
 
   # Enable all helpers to allow states_abbrv_helper to be available
   config.action_controller.include_all_helpers = true

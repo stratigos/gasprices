@@ -1,6 +1,8 @@
 class HomepageController < ApplicationController
 
-  caches_page :index, :about
+  # PAGE CACHING UNAVAIL IN PRODUCTION (READONLY FS)
+  # @see config/environments/production.rb
+  # caches_page :index, :about
 
   def index
     expires_in 1.day, :public => true

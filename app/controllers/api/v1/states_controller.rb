@@ -4,7 +4,9 @@ module API
 
       # Not caching :show due to issue with varying filenames that need
       #  to be cleared, and lack of wildcard with page cache gem
-      caches_page :index
+      # DUE TO READ-ONLY FILEMOUNT WITH HEROKU SERVER, PAGE CACHING NOT
+      #  AVAILABLE IN PRODUCTION
+      # caches_page :index
       
       # Render all States and gas prices. States are selected from a scope
       #  that only selects States updated in the last 24 hours. If there are
@@ -17,7 +19,7 @@ module API
 
         if states.blank? || states.count < 50
           update_gas_records
-          expire_page action: 'index'
+          # expire_page action: 'index'
           states = State.today
         end
 
