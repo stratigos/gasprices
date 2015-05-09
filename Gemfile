@@ -68,4 +68,7 @@ end
 group :production do
   # production webserver
   gem 'puma'
+
+  # Heroku tools
+  gem 'rails_12factor'
 end
