@@ -14,6 +14,9 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  # Page caching
+  config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/deploy"
+
   # Enable all helpers to allow states_abbrv_helper to be available
   config.action_controller.include_all_helpers = true
 

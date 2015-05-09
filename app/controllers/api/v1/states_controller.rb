@@ -1,27 +1,45 @@
 module API
   module V1
     class StatesController < ApplicationController
+
+      # Not caching :show due to issue with varying filenames that need
+      #  to be cleared, and lack of wildcard with page cache gem
+      caches_page :index
       
-      # Render all States and gas prices
+      # Render all States and gas prices. States are selected from a scope
+      #  that only selects States updated in the last 24 hours. If there are
+      #  no States, or all States havent been updated today, then an update
+      #  routine loads the States and their gas price info into the db.
+      # Page caching stores this controller's response in a local file. This
+      #  is expired anytime the States are out of selection scope.
       def index
         states = State.today
 
         if states.blank? || states.count < 50
           update_gas_records
+          expire_page action: 'index'
           states = State.today
         end
+
+        # caching headers
+        expires_in 3.hours, :public => true
+        fresh_when last_modified: states.maximum(:updated_at), :public => true
 
         render json: states, status: 200
       end
 
-      # Render a single State and its gas price
+      # Render a single State and its gas price. If an invalid State name is
+      #  input, a HTTP Status 422 is returned.
       def show
         state_name_param = get_state_name(params[:name])
         state            = State.find_by(name: state_name_param)
 
         if !state.blank?
+          expires_in 1.hour, :public => true
+          fresh_when last_modified: state.updated_at, :public => true
           render json: state, status: 200
         else
+          expires_in 1.hour, :public => true
           render json: {'error' => 'invalid argument'}, status: 422 # invalid payload
         end
       end
@@ -31,6 +49,7 @@ module API
       # Scrapes fuelgaugereport.aaa.com for today's gas price data, and creates
       #  a State record for each if not exists, else updates existing State
       #  record.
+      # @return VOID
       def update_gas_records
         mechanize = Mechanize.new
 
