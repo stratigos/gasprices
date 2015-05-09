@@ -1,7 +1,5 @@
 == README
 
-<b>UNDER CONSTRUCTION</b>
-
 This application displays today's gas prices for each state in the USA.  
 An input field allows for selecting the gas price for a single state.
 
@@ -26,9 +24,13 @@ An input field allows for selecting the gas price for a single state.
 
 <b>Tests:</b> run Minitest with <tt>./bin/rake</tt>
 
-Please see LICENSE.md
+<b>Deployment instructions: </b>
 
-Things you may want to cover:
+* Deployed through free tier of Heroku Ruby/PG dynos.
+* login to heroku: <tt>heroku login</tt> (<tt>heroku create</tt> to create dyno on Heroku for the first time)
+* push app to heroku: <tt>git push heroku master</tt> (<tt>heroku ps:scale web=1</tt> to create first web dyno)
+* to initialize database: <tt>heroku run rake db:migrate</tt>
+* to view application in web browser: <tt>heroku open</tt>
+* <em>puma</em> webserver is run by Heroku on every push via <tt>./Procfile</tt>
 
-
-* Deployment instructions
+Please see <b>LICENSE.md</b>
