@@ -71,4 +71,7 @@ group :production do
 
   # Heroku tools
   gem 'rails_12factor'
+
+  # Request Timeout settings (Heroku only provides timeout after 30s)
+  gem "rack-timeout"
 end
