@@ -51,6 +51,12 @@ gem 'active_model_serializers'
 # Rails 4 flavor page caching
 gem 'actionpack-page_caching'
 
+# faster webserver than WEBrick
+gem 'puma'
+
+# Request Timeout settings (Heroku only provides timeout after 30s)
+gem "rack-timeout"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -68,12 +74,6 @@ group :development, :test do
 end
 
 group :production do
-  # production webserver
-  gem 'puma'
-
   # Heroku tools
   gem 'rails_12factor'
-
-  # Request Timeout settings (Heroku only provides timeout after 30s)
-  gem "rack-timeout"
 end
