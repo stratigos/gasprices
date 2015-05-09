@@ -63,3 +63,7 @@ group :development, :test do
   gem 'debugger'
 end
 
+group :production do
+  # production webserver
+  gem 'puma'
+end
