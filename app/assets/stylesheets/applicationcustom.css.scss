@@ -3,6 +3,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+body {
+  background-color: #EEEEEE;
+}
+
+hr {
+  border-color: #BBBBBB;
+}
+
 /* General Helper Classes */
 
 .shadow {
