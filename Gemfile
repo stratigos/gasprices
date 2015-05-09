@@ -48,6 +48,8 @@ gem 'jquery-ui-rails'
 # assists with serializing JSON data
 gem 'active_model_serializers'
 
+# Rails 4 flavor page caching
+gem 'actionpack-page_caching'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
