@@ -4,7 +4,12 @@ module API
       
       # Render all States and gas prices
       def index
-        states = State.all
+        states = State.today
+
+        if states.blank? || states.count < 50
+          update_gas_records
+          states = State.today
+        end
 
         render json: states, status: 200
       end
@@ -22,6 +27,32 @@ module API
       end
 
       private
+
+      # Scrapes fuelgaugereport.aaa.com for today's gas price data, and creates
+      #  a State record for each if not exists, else updates existing State
+      #  record.
+      def update_gas_records
+        mechanize = Mechanize.new
+
+        page  = mechanize.get('http://fuelgaugereport.aaa.com/import/display.php?lt=state')
+        table = page.at('table#states')
+
+        table.xpath("//tbody/tr").collect do |row|
+          name  = get_state_name(row.at('td[1]').at('a').text.strip)
+          price = row.at('td[2]').text.strip
+
+          state = State.find_by(name: name)
+
+          # Create or Update
+          if state.blank?
+            state = State.new({ name: name, price: price })
+            state.save
+          else
+            state.update({ price: price, :updated_at => Time.now })
+          end
+        end
+      end
+
       # Converts the full text state name into the two-character postal
       #  abbreviation for a US state. If the name was already entered as a two 
       #  character abbreviation, it will be capitalized. 
