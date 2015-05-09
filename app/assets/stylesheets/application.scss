@@ -14,6 +14,8 @@
  *
  * if bootstrap is included here, then remove / reorder '= require_tree .'
  *  and '= require_self' to allow other SASS files to access bootstrap vars
+ *=require jquery-ui/core
+ *=require jquery-ui/theme
  *=require_tree .
  *=require_self
  *
