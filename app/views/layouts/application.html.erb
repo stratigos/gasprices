@@ -7,13 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <header class="navbar navbar-inverse navbar-fixed">
+  <header class="navbar navbar-inverse">
     <div class="container">
       <nav>
         <div class="navbar-header">
           <%=
             link_to image_tag(
-              'http://lorempixel.com/103/64/transport/GP', class: 'img-responsive', alt: 'Gas Prices!', title: 'Gas Prices!'
+              'http://lorempixel.com/103/64/transport/GP',
+              class: 'img-responsive',
+              alt: 'Gas Prices!',
+              title: 'Gas Prices!'
             ), :root, id: 'logo'
           %>
         </div>
