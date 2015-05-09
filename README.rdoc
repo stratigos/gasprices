@@ -5,32 +5,25 @@
 This application displays today's gas prices for each state in the USA.  
 An input field allows for selecting the gas price for a single state.
 
-Ruby: ruby 2.0.0p598 (2014-11-13 revision 48408) [x86_64-linux]
+<em>Ruby:</em> ruby 2.0.0p598 (2014-11-13 revision 48408) [x86_64-linux]
 
-Rails: 4.2.1
+<em>Rails:</em> 4.2.1
 
-DB: PostgreSQL v 9.3.6
+<em>DB:</em> PostgreSQL v 9.3.6
 
-Tests: run Minitest with <tt>./bin/rake</tt>
+<b>Initialize Dependencies:</b> <tt>bundle install</tt>
+
+<b>Initialize Database:</b> <tt>./bin/rake db:migrate</tt> 
+ 
+ To connect to the db, set the following environment params: DEV_PG_DB_USER and TEST_PG_DB_USER, which represent the db username.
+
+<b>Run application:</b> <tt>bundle exec puma -C config/puma.rb</tt>
+
+<b>Tests:</b> run Minitest with <tt>./bin/rake</tt>
 
 Please see LICENSE.md
 
 Things you may want to cover:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
