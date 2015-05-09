@@ -41,14 +41,24 @@ allstateinfo = ->
           name  = $('<span>').addClass('state-name').text(state.name)
           price = $('<span>').addClass('state-price badge').text(state.price)
           list.append $('<li>').addClass('list-group-item').append(name).append(price)
+        $('#all-gas-prices').hide()
         $('#all-gas-prices').html list
+        $('#all-gas-prices').fadeIn 'slow'
       else
         $('#all-gas-prices').text 'error: no states found'
 
 # The document 'ready' loads actions for the initial page request, while
-#  the 'page:load' event handles reloading of the page via turbolinks.
+#  the 'page:load' event handles reloading of the page via any turbolinks.
 $(document).on 'ready page:load', ->
+  # Listen for button click
   $('#state-btn').on 'click', ->
     stateinfo $('#state-input').val()
+
+  # Detect 'Enter' key, since there is no real webform
+  $('#state-input').keypress (event) ->
+    if event.keyCode == 13
+      stateinfo $(this).val()
+
+  # Load initial data onto homepage from server
   allstateinfo()
   return
