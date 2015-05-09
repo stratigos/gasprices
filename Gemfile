@@ -37,8 +37,12 @@ gem 'pg'
 gem 'bootstrap-sass', '~> 3.3.4'
 #gem 'sprockets-rails', '~> 2.1.4'
 
+# adds jquery ui
+gem 'jquery-ui-rails'
+
 # assists with serializing JSON data
 gem 'active_model_serializers'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
