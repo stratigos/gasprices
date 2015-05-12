@@ -2,13 +2,17 @@
 #  All this logic will automatically be available in application.js.
 
 # Requests a single State from the API by either the state postal abbreviation,
-#  or by the full text state name (e.g., 'NY' or 'New York') 
-getStateNameAndGasPrice = (state) ->
+#  or by the full text state name (e.g., 'NY' or 'New York')
+# @param String selector
+#  The containing element in which a single state's gas info will be drawn.
+# @param String state
+#  The full text or postal-abbreviated state name.
+getStateNameAndGasPrice = (selector, state) ->
   $.ajax
     url: '/api/v1/states/' + state
     dataType: 'json'
     error: (jqXHR, textStatus, errorThrown) ->
-      $('#state-gas-price').html "#{textStatus}: invalid US state"
+      handleGasInfoErrors selector, 'Error: invalid US state.'
     success: (data, textStatus, jqXHR) ->
       if data.state
         $('#state-gas-price').hide()
@@ -21,17 +25,19 @@ getStateNameAndGasPrice = (state) ->
         $('#state-gas-price').fadeIn 'fast', ->
           $(this).effect 'shake', {direction: 'down', distance: 10, times: 2}
       else
-        $('#state-gas-price').text('error: invalid US state')
+        handleGasInfoErrors selector, 'Error: invalid US state.'
 
 # Hits API for list of States and their gas prices. If prices are out of date,
 #  or there are fewer than 50 States, the list is refreshed. This is called by
 #  the document.ready routine, defined below.
-getStateNamesAndGasPrices = ->
+# @param String selector
+#   The containing element in which gas price information is drawn.
+getStateNamesAndGasPrices = (selector) ->
   $.ajax
     url: '/api/v1/states'
     dataType: 'json'
     error: (jqXHR, textStatus, errorThrown) ->
-      $('#all-gas-prices').html "There was an issue processing this request. Please try again."
+      handleGasInfoErrors selector, 'There was an issue processing this request. Please try again.'
     success: (data, textStatus, jqXHR) ->
       if data.states
         states = data.states
@@ -44,22 +50,24 @@ getStateNamesAndGasPrices = ->
         $('#all-gas-prices').html list
         $('#all-gas-prices').fadeIn 'slow'
       else
-        $('#all-gas-prices').text 'error: no states found'
+        handleGasInfoErrors selector, 'Error: no states found'
+
+# Replaces the given selector's content with an error message
+handleGasInfoErrors = (selector, message) ->
+  $(selector).html message
 
 # The document 'ready' loads actions for the initial page request, while
 #  the 'page:load' event handles reloading of the page via any turbolinks.
 $(document).on 'ready page:load', ->
   # Listen for button click
   $('#state-btn').on 'click', ->
-    getStateNameAndGasPrice $('#state-input').val()
+    getStateNameAndGasPrice '#state-gas-price', $('#state-input').val()
 
   # Detect 'Enter' key, since there is no real webform
   $('#state-input').keypress (event) ->
     if event.keyCode == 13
-      getStateNameAndGasPrice $(this).val()
+      getStateNameAndGasPrice '#state-gas-price', $(this).val()
 
   # Load initial data onto homepage from server
-  getStateNamesAndGasPrices()
+  getStateNamesAndGasPrices '#all-gas-prices'
   return
-
-
