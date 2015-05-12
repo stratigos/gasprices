@@ -3,7 +3,7 @@
 
 # Requests a single State from the API by either the state postal abbreviation,
 #  or by the full text state name (e.g., 'NY' or 'New York') 
-stateinfo = (state) ->
+getStateNameAndGasPrice = (state) ->
   $.ajax
     url: '/api/v1/states/' + state
     dataType: 'json'
@@ -26,7 +26,7 @@ stateinfo = (state) ->
 # Hits API for list of States and their gas prices. If prices are out of date,
 #  or there are fewer than 50 States, the list is refreshed. This is called by
 #  the document.ready routine, defined below.
-allstateinfo = ->
+getStateNamesAndGasPrices = ->
   $.ajax
     url: '/api/v1/states'
     dataType: 'json'
@@ -51,13 +51,15 @@ allstateinfo = ->
 $(document).on 'ready page:load', ->
   # Listen for button click
   $('#state-btn').on 'click', ->
-    stateinfo $('#state-input').val()
+    getStateNameAndGasPrice $('#state-input').val()
 
   # Detect 'Enter' key, since there is no real webform
   $('#state-input').keypress (event) ->
     if event.keyCode == 13
-      stateinfo $(this).val()
+      getStateNameAndGasPrice $(this).val()
 
   # Load initial data onto homepage from server
-  allstateinfo()
+  getStateNamesAndGasPrices()
   return
+
+
