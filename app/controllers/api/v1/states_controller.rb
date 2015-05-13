@@ -3,7 +3,7 @@ module API
     class StatesController < ApplicationController
 
       # DUE TO READ-ONLY FILEMOUNT WITH HEROKU SERVER, PAGE CACHING NOT
-      #  AVAILABLE IN PRODUCTION
+      #  AVAILABLE IN PRODUCTION (UNTIL CDN SOLUTION IMPLEMENTED)
       # Not caching :show due to issue with varying filenames that need
       #  to be cleared, and lack of wildcard with page cache gem
       # caches_page :index
