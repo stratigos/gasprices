@@ -64,6 +64,9 @@ module API
       # Scrapes fuelgaugereport.aaa.com for today's gas price data, and creates
       #  a State record for each if not exists, else updates existing State
       #  record.
+      # @todo Use config, function argument, or parameter of some sort to get
+      #  the URL and CSS selector used in page scraping. These string literals
+      #  cause a higher degree of brittleness.
       # @return VOID
       def update_gas_records
         mechanize = Mechanize.new
@@ -97,6 +100,11 @@ module API
         # Storing hash of US states / abbreviations here for now to simplify 
         #  conversion process, and reduce load on DB. Can be abstracted into
         #  a helper or module if needed elsewhere.
+        # Alternatively, DB could be seeded with all states in place, with
+        #  no/zero value for price, and the `State.today` scope could nest
+        #  inside an additional scope requiring a valid price value. This
+        #  would cause all State records to be updated with freshly scraped
+        #  values on the app's first request.
         us_states_abbrv = {
           "Alabama"        => "AL",
           "Alaska"         => "AK",
