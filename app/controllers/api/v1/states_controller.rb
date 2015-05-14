@@ -23,12 +23,15 @@ module API
           states = State.today
         end
 
-        # calculating cache values
+        # Calculating cache values.
+        # While DateTime +(n) suffices for adding one day to a DateTime, 
+        #  specifying the value as `+ 1.day` instead of just `+ 1` more clearly
+        #  demonstrates the operation.
         last_update    = states.maximum(:updated_at).to_datetime
-        next_update    = last_update + 1
+        next_update    = last_update + 1.day
         will_expire_in = next_update.to_time - Time.now
 
-        # caching headers
+        # Caching headers.
         expires_in will_expire_in.to_i, :public => true
         response.headers['Last-Modified'] = last_update.utc.to_s
         response.headers['Expires']       = next_update.utc.to_s
